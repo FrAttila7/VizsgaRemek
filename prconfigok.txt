@@ -1,0 +1,1081 @@
+LayerSw2
+
+interface Port-channel1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 70
+ switchport mode trunk
+!
+interface GigabitEthernet0/0
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/1
+ no switchport
+ ip address 192.168.1.2 255.255.255.248
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 70
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 1 mode auto
+!
+interface GigabitEthernet1/1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 70
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 1 mode auto
+!
+interface GigabitEthernet1/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/0
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/1
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface Vlan10
+ ip address 192.168.10.2 255.255.255.0
+!
+interface Vlan20
+ ip address 192.168.20.2 255.255.255.0
+!
+interface Vlan30
+ ip address 192.168.30.2 255.255.255.0
+!
+interface Vlan40
+ ip address 192.168.40.2 255.255.255.0
+!
+interface Vlan70
+ ip address 192.168.70.2 255.255.255.0
+!
+!
+router ospf 10
+ router-id 7.7.7.7
+ network 192.168.1.0 0.0.0.7 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 192.168.20.0 0.0.0.255 area 0
+ network 192.168.30.0 0.0.0.255 area 0
+ network 192.168.40.0 0.0.0.255 area 0
+
+line con 0
+ login local
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+
+
+
+vtp domain ceg.hu
+vtp pass 12345
+vtp mode client
+
+
+
+
+-------------------------------------------------------------------
+
+
+
+LayerSw1
+
+
+interface Port-channel1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 70
+ switchport mode trunk
+!
+interface GigabitEthernet0/1
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/0
+ no switchport
+ ip address 192.168.1.10 255.255.255.248
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 70
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet1/1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 70
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet1/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/1
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface Vlan10
+ ip address 192.168.10.1 255.255.255.0
+ ip helper-address 192.168.50.10
+!
+interface Vlan20
+ ip address 192.168.20.1 255.255.255.0
+ ip helper-address 192.168.50.10
+!
+interface Vlan30
+ ip address 192.168.30.1 255.255.255.0
+ ip helper-address 192.168.50.10
+!
+interface Vlan40
+ ip address 192.168.40.1 255.255.255.0
+ ip helper-address 192.168.50.10
+!
+interface Vlan70
+ ip address 192.168.70.1 255.255.255.0
+!
+!
+router ospf 10
+ router-id 6.6.6.6
+ network 192.168.1.8 0.0.0.7 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 192.168.20.0 0.0.0.255 area 0
+ network 192.168.30.0 0.0.0.255 area 0
+ network 192.168.40.0 0.0.0.255 area 0
+
+
+
+
+vtp domain ceg.hu
+vtp pass 12345
+vtp mode server
+
+
+
+vlan 10
+name Iroda
+vlan 20
+name VoIP
+vlan 30 
+name SysAdmin
+vlan 40
+name Wifi
+vlan 50
+name Server
+vlan 60 
+name Szupertitkosvlan
+vlan 70 
+name Natvi
+vlan 80 
+name Secu 
+
+
+
+-------------------------------------------------------------------
+
+
+
+Ceg1
+
+interface GigabitEthernet0/0
+ ip address 192.168.1.9 255.255.255.248
+ duplex full
+ speed 1000
+ media-type gbic
+ negotiation auto
+ standby 1 ip 192.168.1.3
+!
+interface GigabitEthernet1/0
+ ip address 192.168.101.1 255.255.255.252
+ negotiation auto
+!
+router ospf 10
+ router-id 5.5.5.5
+ log-adjacency-changes
+ network 192.168.1.8 0.0.0.7 area 0
+ network 192.168.101.0 0.0.0.3 area 0
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+
+
+Ceg2
+
+
+interface GigabitEthernet0/0
+ ip address 192.168.100.1 255.255.255.252
+ duplex full
+ speed 1000
+ media-type gbic
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ ip address 192.168.1.1 255.255.255.248
+ negotiation auto
+ standby 1 ip 192.168.1.3
+ standby 1 preempt
+ standby 1 priority 150
+!
+router ospf 10
+ router-id 4.4.4.4
+ log-adjacency-changes
+ network 192.168.1.0 0.0.0.7 area 0
+ network 192.168.100.0 0.0.0.3 area 0
+
+
+
+
+
+
+-------------------------------------------------------------------
+
+
+
+sw1-4
+
+interface GigabitEthernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/2
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/3
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/2
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/3
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/0
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6801
+ switchport port-security
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/2
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/3
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+
+
+
+
+vtp domain ceg.hu
+vtp pass 12345
+vtp mode client
+
+
+
+
+
+-------------------------------------------------------------------
+
+Central
+
+interface GigabitEthernet0/0
+ ip address 192.168.100.9 255.255.255.252
+ duplex full
+ speed 1000
+ media-type gbic
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ ip address 192.168.101.2 255.255.255.252
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ ip address 192.168.100.2 255.255.255.252
+ negotiation auto
+!
+interface GigabitEthernet3/0
+ ip address 192.168.100.6 255.255.255.252
+ negotiation auto
+!
+router ospf 10
+ router-id 1.1.1.1
+ log-adjacency-changes
+ network 192.168.100.0 0.0.0.3 area 0
+ network 192.168.100.4 0.0.0.3 area 0
+ network 192.168.100.8 0.0.0.3 area 0
+ network 192.168.101.0 0.0.0.3 area 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+SVRVR
+
+
+
+interface Ethernet0/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex full
+ speed 1000
+ media-type gbic
+ negotiation auto
+!
+interface GigabitEthernet0/0.5
+ ip helper-address 192.168.50.10
+ shutdown
+!
+interface GigabitEthernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.0
+ ip helper-address 192.168.50.10
+!
+interface GigabitEthernet1/0
+ ip address 192.168.100.14 255.255.255.252
+ ip helper-address 192.168.50.10
+ negotiation auto
+!
+router ospf 10
+ router-id 2.2.2.2
+ log-adjacency-changes
+ network 192.168.50.0 0.0.0.255 area 0
+ network 192.168.100.12 0.0.0.3 area 0
+!
+
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ login local
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+
+
+
+
+
+
+-------------------------------------------------------------------
+SVRVSw1
+
+
+ip dhcp snooping vlan 10,20,30,40,50,80
+ip dhcp snooping
+ip domain-name ceg.hu
+ip cef
+no ipv6 cef
+!
+
+interface GigabitEthernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ no negotiation auto
+!
+interface GigabitEthernet0/1
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ switchport mode access
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/1
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/1
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/2
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/3
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/0
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ media-type rj45
+ negotiation auto
+ ip dhcp snooping trust
+!
+interface GigabitEthernet3/1
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/2
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/3
+ switchport access vlan 50
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ media-type rj45
+ negotiation auto
+!
+interface Vlan50
+ no ip address
+ shutdown
+!
+ip default-gateway 192.168.50.1
+ip forward-protocol nd
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+Secu
+
+
+
+
+
+no ip domain lookup
+ip domain name ceg.hu
+no ipv6 cef
+!
+
+username attila privilege 15 secret 5 $1$cu4N$fEdRDAxA5LD4soG0KlKBg1
+username adam privilege 15 secret 5 $1$Fkv4$NBkCpcefuQovgctUv/.Lx1
+username szadni privilege 15 secret 5 $1$Jy/m$HfJGwVVUKWRaQDiTkW/Qi/
+archive
+ log config
+  hidekeys
+!
+
+interface Ethernet0/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface GigabitEthernet0/0
+ ip address 192.168.100.5 255.255.255.252
+ duplex full
+ speed 1000
+ media-type gbic
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet1/0.8
+ encapsulation dot1Q 80
+ ip address 192.168.80.1 255.255.255.0
+ ip helper-address 192.168.50.10
+!
+router ospf 10
+ router-id 3.3.3.3
+ log-adjacency-changes
+ network 192.168.80.0 0.0.0.255 area 0
+ network 192.168.100.4 0.0.0.3 area 0
+!
+
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ login local
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------
+SecuSw
+
+
+
+
+username attila privilege 15 secret 5 $1$5DV.$.SegRYXuj3nKaO4dsFxII0
+username adam privilege 15 secret 5 $1$prZX$zQ6unyQ4quTenlWmwizXa.
+username szadni privilege 15 secret 5 $1$KGe1$De.RIdkEAiXWdWL7Tbbdq1
+no aaa new-model
+!
+
+ip domain-name ceg.hu
+ip cef
+no ipv6 cef
+!
+
+interface GigabitEthernet0/0
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/2
+ switchport mode access
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ switchport mode access
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ switchport trunk encapsulation dot1q
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/1
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/2
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/3
+ switchport mode access
+ switchport port-security mac-address sticky
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ switchport mode access
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/1
+ switchport mode access
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/2
+ switchport access vlan 60
+ switchport mode access
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/3
+ switchport access vlan 60
+ switchport mode access
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/0
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/1
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/2
+ switchport access vlan 20
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/3
+ switchport access vlan 40
+ switchport mode access
+ media-type rj45
+ negotiation auto
+
+
+
+
+
+
+-------------------------------------------------------------------
+Outside
+
+
+
+
+
+
+interface Ethernet0/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface GigabitEthernet0/0
+ ip address 10.1.1.2 255.255.255.252
+ duplex full
+ speed 1000
+ media-type gbic
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ ip address dhcp
+ ip nat outside
+ ip virtual-reassembly
+ negotiation auto
+!
+interface POS2/0
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip nat inside source list 1 interface GigabitEthernet0/0 overload
+!
+access-list 1 permit any
+
+
+
+
+
+
+-------------------------------------------------------------------
+ASA
+
+
+
+
+interface GigabitEthernet0/0
+ nameif INSIDE
+ security-level 100
+ ip address 192.168.100.10 255.255.255.252
+
+
+interface GigabitEthernet0/1
+ nameif DMZ
+ security-level 50
+ ip address 192.168.100.13 255.255.255.252
+
+
+interface GigabitEthernet0/2
+ nameif OUTSIDE
+ security-level 0
+ ip address 10.1.1.1 255.255.255.0
+
+
+interface GigabitEthernet0/3
+ shutdown  
+ no nameif 
+ no security-level 
+ no ip address
+ 
+
+interface GigabitEthernet0/4
+ shutdown  
+ no nameif 
+ no security-level 
+ no ip address
+
+
+interface GigabitEthernet0/5
+ shutdown  
+ no nameif 
+ no security-level 
+ no ip address
+
+
+interface GigabitEthernet0/6
+ shutdown  
+ no nameif 
+ no security-level 
+ no ip address
+
+
+interface Management0/0
+ shutdown  
+ no nameif 
+ no security-level 
+ no ip address
+
+
+ftp mode passive
+object network PUBLIKUS_MEDENCE
+ range 10.1.1.50 10.1.1.150
+object network DMZ_TO_OUTSIDE
+ subnet 192.168.50.0 255.255.255.0
+object network INSIDE1
+ subnet 192.168.10.0 255.255.255.0
+object network INSIDE2
+ subnet 192.168.20.0 255.255.255.0
+object network INSIDE3
+ subnet 192.168.30.0 255.255.255.0
+object network INSIDE4
+ subnet 192.168.40.0 255.255.255.0
+object network INSIDE8
+ subnet 192.168.80.0 255.255.255.0
+object network (DMZ_TO_OUTSIDE)
+object-group network 1-8
+ network-object object INSIDE1
+ network-object object INSIDE2
+ network-object object INSIDE3
+ network-object object INSIDE4
+ network-object object INSIDE8
+access-list OUTSIDE_INBOUND extended permit tcp any host 192.168.50.11 eq www
+access-list DMZ_OUTBOUND extended permit ip 192.168.50.0 255.255.255.0 any
+
+
+object network DMZ_TO_OUTSIDE
+ nat (DMZ,OUTSIDE) dynamic PUBLIKUS_MEDENCE
+access-group DMZ_INBOUND in interface DMZ
+access-group OUTSIDE_INBOUND in interface OUTSIDE
+router ospf 10
+ router-id 8.8.8.8
+ network 192.168.100.8 255.255.255.252 area 0
+ network 192.168.100.12 255.255.255.252 area 0
+
+route OUTSIDE 0.0.0.0 0.0.0.0 10.1.1.2 1
+
+
+
+
+
+
+
+
+
+-----------------------------------------------
+TCLSH
+
+
+Router#foreach address {
+  192.168.100.10
+  192.168.100.9
+  192.168.100.6
+  192.168.100.5
+  192.168.100.2
+  192.168.100.1
+  192.168.101.2 
+  192.168.101.2
+  192.168.1.10
+  192.168.1.9
+  192.168.10.1
+  192.168.20.1    
+  192.168.30.1
+  192.168.40.1
+  192.168.70.1
+  192.168.70.2
+ } { ping $address repeat 3 size 1500 }
+ 
+
+
+
+
